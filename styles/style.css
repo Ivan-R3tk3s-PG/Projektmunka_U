@@ -1,0 +1,232 @@
+/* --- Változók és "Dark Mode" beállítások --- */
+:root {
+    --bg-color: #0f0f11;         /* Fekete háttér */
+    --card-bg: #1a1a20;          /* Sötétszürke kártyák */
+    --primary-color: #8a2be2;    /* Neon Lila */
+    --accent-color: #00f7ff;     /* Neon Cián */
+    --text-color: #ffffff;
+    --text-muted: #a0a0b0;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Layout Segédek --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header --- */
+.main-header {
+    background: linear-gradient(180deg, rgba(138,43,226,0.15) 0%, rgba(15,15,17,0) 100%);
+    padding: 4rem 0 2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.main-header h1 {
+    font-size: 2.5rem; /* Kicsit kisebb, hogy kiférjen a hosszú név */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .main-header h1 {
+        font-size: 3.5rem; /* Desktopon mehet nagyban */
+    }
+}
+
+.main-header .highlight {
+    color: var(--accent-color);
+    text-shadow: 0 0 20px rgba(0, 247, 255, 0.5); /* Erősebb neon ragyogás */
+}
+
+.main-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+/* --- GRID Rendszer --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- Kártya Stílusok --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    transition: transform var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px rgba(138, 43, 226, 0.25);
+}
+
+/* Kép konténer */
+.card-image-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(110%);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                filter 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+    filter: grayscale(0%) contrast(120%);
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0,0,0,0.85);
+    color: var(--accent-color);
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+    border: 1px solid var(--accent-color);
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
+}
+
+/* Tartalom */
+.card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card h2 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+/* --- Gomb --- */
+.btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--text-color);
+    padding: 10px 25px;
+    text-decoration: none;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 20px var(--primary-color);
+    transform: scale(1.02);
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: #0a0a0c;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.divider {
+    height: 2px;
+    width: 60px;
+    background-color: var(--accent-color);
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.creators {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.creators span {
+    color: white;
+    font-weight: 600;
+    display: block;
+    margin-top: 5px;
+    font-size: 1rem;
+}

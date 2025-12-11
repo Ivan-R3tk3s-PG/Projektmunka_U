@@ -10,21 +10,17 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header class="main-header">
         <div class="container">
-            <!-- A név tördölve a stílus miatt -->
             <h1>NYÍRBÁTORI <br><span class="highlight">TURBO DUGDOSÓK</span></h1>
             <p>Nyírbátor estélyébe dugdossuk a Turbókat</p>
         </div>
     </header>
 
-    <!-- Fő tartalom -->
     <main>
         <section class="container">
             <div class="gallery-grid">
 
-                <!-- 1. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
                         <img src="img.vid/720/mc720.jpg" alt="720 Turbo" data-spec-video="img.vid/720/720.mp4">
@@ -37,7 +33,6 @@
                     </div>
                 </article>
 
-                <!-- 2. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
                         <img src="img.vid/bmwm3/bmwm3.png" alt="BMW M3" data-spec-video="img.vid/bmwm3/bmwm3.mp4">
@@ -50,7 +45,6 @@
                     </div>
                 </article>
 
-                <!-- 3. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
                         <img src="img.vid/psc992/psc992.jpg" alt="Porsche 992" data-spec-video="img.vid/psc992/psc992.mp4">
@@ -63,7 +57,6 @@
                     </div>
                 </article>
 
-                <!-- 4. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
                         <img src="img.vid/rs7/rs7.jpg" alt="Audi RS7" data-spec-video="img.vid/rs7/rs7vid.mp4">
@@ -76,7 +69,6 @@
                     </div>
                 </article>
 
-                <!-- 5. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
                         <img src="img.vid/s63/s63.jpg" alt="Mercedes S63" data-spec-video="img.vid/s63/s63.mp4">
@@ -89,7 +81,6 @@
                     </div>
                 </article>
 
-                <!-- 6. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
                         <img src="img.vid/sf90/sf90.jpg" alt="Ferrari SF90" data-spec-video="img.vid/sf90/sf90.mp4">
@@ -105,22 +96,18 @@
             </div>
         </section>
 
-        <!-- Specs modal (side-by-side) -->
         <div id="specsModal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:1100;padding:60px 20px;pointer-events:auto;">
             <div id="specsInner" style="background:#070707;color:#fff;border-radius:10px;padding:16px;max-width:900px;width:96%;box-shadow:0 12px 40px rgba(0,0,0,0.7);position:relative;display:flex;gap:22px;align-items:center;max-height:calc(100vh - 140px);overflow:hidden;flex-direction:row;">
                 <button id="closeSpecs" style="position:absolute;right:12px;top:12px;background:#fff;color:#000;border-radius:50%;width:36px;height:36px;border:0;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.4);">✕</button>
                 <button id="rotateSpecs" title="Rotate video" style="position:absolute;right:60px;top:12px;background:transparent;color:#fff;border-radius:50%;width:36px;height:36px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;align-items:center;justify-content:center;">⤾</button>
 
-                <!-- Video wrapper (id used to toggle layout) -->
                 <div id="specsMediaWrap" style="flex:0 0 68%;display:flex;align-items:center;justify-content:center;height:calc(100vh - 220px);">
                     <video id="specsVideo" playsinline muted loop style="width:100%;height:100%;background:#000;border-radius:10px;object-fit:cover;box-shadow:0 10px 30px rgba(0,0,0,0.6);transform:rotate(0deg);transition:transform 200ms ease;max-width:100%;max-height:100%;"></video>
                 </div>
 
-                <!-- Text wrapper (id used to toggle layout) -->
                 <div id="specsTextWrap" style="flex:0 0 32%;min-width:220px;max-width:320px;padding-left:16px;border-left:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:12px;overflow:hidden;">
                     <h3 id="specsTitle" style="margin:0;font-size:1.25rem;font-weight:800;color:#fff"></h3>
                     <div id="specsList" style="font-size:0.98rem;line-height:1.6;color:#e6e6e6;">
-                        <!-- Filled by JS -->
                     </div>
                     <div style="margin-top:auto;font-size:0.85rem;color:#a8a8a8;">Bezáráshoz kattints az X-re vagy a háttérre.</div>
                 </div>
@@ -139,12 +126,10 @@
                 const specsVideo = document.getElementById('specsVideo');
                 const closeSpecs = document.getElementById('closeSpecs');
                 const rotateSpecs = document.getElementById('rotateSpecs');
-                let _rotation = 0; // degrees
+                let _rotation = 0;
 
                 function applyLandscapeLayout(){
-                    // video on top, specs below — wider, less tall hero
                     specsInner.style.flexDirection = 'column';
-                    // make modal wider but capped and reduce overall height so page shows above/below
                     specsInner.style.maxWidth = '1100px';
                     specsInner.style.width = '85%';
                     specsInner.style.maxHeight = '70vh';
@@ -152,7 +137,6 @@
                     specsInner.style.alignItems = 'stretch';
                     specsInner.style.padding = '18px';
 
-                    // media: use landscape aspect and limit height so it doesn't dominate
                     specsMediaWrap.style.flex = '0 0 auto';
                     specsMediaWrap.style.height = 'auto';
                     specsMediaWrap.style.display = 'flex';
@@ -164,7 +148,6 @@
                     specsVideo.style.maxHeight = '60vh';
                     specsVideo.style.borderRadius = '8px';
 
-                    // text area below video — full width, readable spacing
                     specsTextWrap.style.flex = '0 0 100%';
                     specsTextWrap.style.minWidth = '0';
                     specsTextWrap.style.paddingLeft = '0';
@@ -178,7 +161,6 @@
                     specsTextWrap.style.gap = '10px';
                     specsTextWrap.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.01), transparent)';
 
-                    // typography tweaks for readability
                     specsTitle.style.textAlign = 'left';
                     specsTitle.style.fontSize = '1.15rem';
                     specsList.style.fontSize = '1rem';
@@ -187,9 +169,7 @@
                 }
 
                 function applyPortraitLayout(){
-                    // video left, specs right
                     specsInner.style.flexDirection = 'row';
-                    // reset modal sizing to default portrait-friendly values
                     specsInner.style.maxWidth = '900px';
                     specsInner.style.width = '96%';
                     specsInner.style.maxHeight = 'calc(100vh - 140px)';
@@ -226,42 +206,34 @@
                         <div style="margin-bottom:8px;color:#d6ffd6">🏁 Végsebesség: <strong style=\"color:#fff\">${top}</strong></div>
                     `;
 
-                    // sensible default while loading
                     applyPortraitLayout();
 
-                    // clean up any previous handlers/timeouts
                     if(window._specsMetaHandler){
                         specsVideo.removeEventListener('loadedmetadata', window._specsMetaHandler);
                         window._specsMetaHandler = null;
                     }
                     if(window._specsFallback) { clearTimeout(window._specsFallback); window._specsFallback = null; }
-                    // remove any previous 'ended' handler so we don't attach duplicates
                     if(window._specsEndedHandler){ specsVideo.removeEventListener('ended', window._specsEndedHandler); window._specsEndedHandler = null; }
 
                     if(video){
-                        // set src then wait for metadata to determine orientation (unless forced)
                         specsVideo.src = video;
                         specsVideo.currentTime = 0;
                         specsVideo.muted = true;
-                        // ensure looping is enabled (attribute + property)
                         specsVideo.loop = true;
                         specsVideo.setAttribute('loop', '');
 
-                        // fallback replay in case some browsers/players don't respect loop on dynamic src
                         window._specsEndedHandler = function(){
                             try{ specsVideo.currentTime = 0; specsVideo.play().catch(()=>{}); } catch(e){}
                         };
                         specsVideo.addEventListener('ended', window._specsEndedHandler);
 
                         if(forcedOrientation === 'landscape'){
-                            // force landscape layout (video on top)
                             applyLandscapeLayout();
                             specsVideo.play().catch(()=>{});
                         } else if(forcedOrientation === 'portrait'){
                             applyPortraitLayout();
                             specsVideo.play().catch(()=>{});
                         } else {
-                            // Use loadedmetadata event to inspect intrinsic video dimensions
                             window._specsMetaHandler = function(){
                                 const w = specsVideo.videoWidth || 0;
                                 const h = specsVideo.videoHeight || 0;
@@ -271,14 +243,12 @@
                                     applyPortraitLayout();
                                 }
                                 specsVideo.play().catch(()=>{});
-                                // cleanup
                                 specsVideo.removeEventListener('loadedmetadata', window._specsMetaHandler);
                                 window._specsMetaHandler = null;
                                 if(window._specsFallback){ clearTimeout(window._specsFallback); window._specsFallback = null; }
                             };
                             specsVideo.addEventListener('loadedmetadata', window._specsMetaHandler);
 
-                            // fallback if metadata doesn't arrive quickly
                             window._specsFallback = setTimeout(function(){
                                 if(!specsVideo.videoWidth || !specsVideo.videoHeight){
                                     applyPortraitLayout();
@@ -290,31 +260,25 @@
                         applyPortraitLayout();
                     }
 
-                    // prevent body scrollbar while modal is open
                     body.style.overflow = 'hidden';
                     specsModal.style.display = 'flex';
                 }
 
                 function closeSpecsModal(){
                     specsVideo.pause(); specsVideo.src = '';
-                    // remove ended handler if present
                     if(window._specsEndedHandler){ specsVideo.removeEventListener('ended', window._specsEndedHandler); window._specsEndedHandler = null; }
-                    // reset rotation
                     _rotation = 0; specsVideo.style.transform = 'rotate(0deg)'; specsVideo.style.objectFit = 'cover';
                     if(window._specsMetaHandler){ specsVideo.removeEventListener('loadedmetadata', window._specsMetaHandler); window._specsMetaHandler = null; }
                     if(window._specsFallback){ clearTimeout(window._specsFallback); window._specsFallback = null; }
                     specsModal.style.display = 'none';
                     body.style.overflow = '';
-                    // reset layout defaults
                     applyPortraitLayout();
                 }
 
-                // rotate handler: rotates 90deg steps and adjusts fit
                 rotateSpecs.addEventListener('click', function(e){
                     e.stopPropagation();
                     _rotation = (_rotation + 90) % 360;
                     specsVideo.style.transform = 'rotate(' + _rotation + 'deg)';
-                    // if rotated by 90 or 270, fit by height to avoid overflow
                     if(_rotation % 180 !== 0){
                         specsVideo.style.objectFit = 'contain';
                         specsVideo.style.width = 'auto';
@@ -326,7 +290,6 @@
                     }
                 });
 
-                // Attach handlers
                 document.querySelectorAll('.specs-btn').forEach(btn => {
                     btn.addEventListener('click', function(e){ e.preventDefault(); openSpecs(this); });
                 });
@@ -338,7 +301,6 @@
         </script>
     </main>
 
-    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <p class="brand">NYÍRBÁTORI TURBO DUGDOSÓK &copy; 2025</p>

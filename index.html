@@ -149,21 +149,41 @@
                     specsInner.style.width = '85%';
                     specsInner.style.maxHeight = '70vh';
                     specsInner.style.overflow = 'hidden';
+                    specsInner.style.alignItems = 'stretch';
+                    specsInner.style.padding = '18px';
 
                     // media: use landscape aspect and limit height so it doesn't dominate
                     specsMediaWrap.style.flex = '0 0 auto';
                     specsMediaWrap.style.height = 'auto';
+                    specsMediaWrap.style.display = 'flex';
+                    specsMediaWrap.style.alignItems = 'center';
+                    specsMediaWrap.style.justifyContent = 'center';
                     specsVideo.style.width = '100%';
                     specsVideo.style.height = 'auto';
                     specsVideo.style.aspectRatio = '16/9';
                     specsVideo.style.maxHeight = '60vh';
+                    specsVideo.style.borderRadius = '8px';
 
+                    // text area below video — full width, readable spacing
                     specsTextWrap.style.flex = '0 0 100%';
                     specsTextWrap.style.minWidth = '0';
                     specsTextWrap.style.paddingLeft = '0';
                     specsTextWrap.style.borderLeft = 'none';
                     specsTextWrap.style.borderTop = '1px solid rgba(255,255,255,0.06)';
-                    specsTextWrap.style.paddingTop = '14px';
+                    specsTextWrap.style.paddingTop = '16px';
+                    specsTextWrap.style.display = 'flex';
+                    specsTextWrap.style.flexDirection = 'column';
+                    specsTextWrap.style.alignItems = 'flex-start';
+                    specsTextWrap.style.justifyContent = 'flex-start';
+                    specsTextWrap.style.gap = '10px';
+                    specsTextWrap.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.01), transparent)';
+
+                    // typography tweaks for readability
+                    specsTitle.style.textAlign = 'left';
+                    specsTitle.style.fontSize = '1.15rem';
+                    specsList.style.fontSize = '1rem';
+                    specsList.style.lineHeight = '1.5';
+                    specsList.style.color = '#e6e6e6';
                 }
 
                 function applyPortraitLayout(){

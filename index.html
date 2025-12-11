@@ -40,12 +40,12 @@
                 <!-- 2. Kártya -->
                 <article class="card">
                     <div class="card-image-wrapper">
-                        <img src="img.vid/bmwm3/bmwm3.jpg" alt="BMW M3" data-spec-video="img.vid/bmwm3/bmwm3.mp4">
+                        <img src="img.vid/bmwm3/bmwm3.png" alt="BMW M3" data-spec-video="img.vid/bmwm3/bmwm3.mp4">
                     </div>
                     <div class="card-content">
                         <h2>BMW M3</h2>
                         <div class="card-actions">
-                            <a href="#" class="btn specs-btn" data-spec-video="img.vid/bmwm3/bmwm3.mp4" data-hp="500" data-accel="3.9s" data-top="290 km/h" data-orientation="landscape">Specifikáció</a>
+                            <a href="#" class="btn specs-btn" data-spec-video="img.vid/bmwm3/bmwm3.mp4" data-hp="500" data-accel="3.9s" data-top="290 km/h">Specifikáció</a>
                         </div>
                     </div>
                 </article>
@@ -235,12 +235,23 @@
                         window._specsMetaHandler = null;
                     }
                     if(window._specsFallback) { clearTimeout(window._specsFallback); window._specsFallback = null; }
+                    // remove any previous 'ended' handler so we don't attach duplicates
+                    if(window._specsEndedHandler){ specsVideo.removeEventListener('ended', window._specsEndedHandler); window._specsEndedHandler = null; }
 
                     if(video){
                         // set src then wait for metadata to determine orientation (unless forced)
                         specsVideo.src = video;
                         specsVideo.currentTime = 0;
                         specsVideo.muted = true;
+                        // ensure looping is enabled (attribute + property)
+                        specsVideo.loop = true;
+                        specsVideo.setAttribute('loop', '');
+
+                        // fallback replay in case some browsers/players don't respect loop on dynamic src
+                        window._specsEndedHandler = function(){
+                            try{ specsVideo.currentTime = 0; specsVideo.play().catch(()=>{}); } catch(e){}
+                        };
+                        specsVideo.addEventListener('ended', window._specsEndedHandler);
 
                         if(forcedOrientation === 'landscape'){
                             // force landscape layout (video on top)
@@ -286,6 +297,8 @@
 
                 function closeSpecsModal(){
                     specsVideo.pause(); specsVideo.src = '';
+                    // remove ended handler if present
+                    if(window._specsEndedHandler){ specsVideo.removeEventListener('ended', window._specsEndedHandler); window._specsEndedHandler = null; }
                     // reset rotation
                     _rotation = 0; specsVideo.style.transform = 'rotate(0deg)'; specsVideo.style.objectFit = 'cover';
                     if(window._specsMetaHandler){ specsVideo.removeEventListener('loadedmetadata', window._specsMetaHandler); window._specsMetaHandler = null; }
